@@ -31,7 +31,8 @@ export function activate(context: ExtensionContext) {
         commands.registerCommand('extension.toggleBold', toggleBold),
         commands.registerCommand('extension.toggleItalic', toggleItalic),
         commands.registerCommand('extension.toggleInlineLiteral', toggleInlineLiteral),
-        commands.registerCommand('extension.toggleLink', toggleLink)
+        commands.registerCommand('extension.toggleLink', toggleLink),
+        commands.registerCommand('extension.toggleCode', toggleCode)
     );
 }
 
@@ -51,6 +52,10 @@ function toggleInlineLiteral() {
 
 function toggleLink() {
     return styleByWrapping(' `', ' <>`_ ');
+}
+
+function toggleCode() {
+    return styleByWrapping('\n.. code-block:: ${2:language}\n\n   ', '${1:}\n$0\n');
 }
 
 function styleByWrapping(startPattern: string, endPattern?: string | undefined) {
